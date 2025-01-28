@@ -31,9 +31,9 @@ export const query = graphql`
   query {
   allFile(filter: { sourceInstanceName: { eq: "images" } }) {
     nodes {
+      id
       childImageSharp {
         gatsbyImageData(
-          width: 600
           placeholder: BLURRED
           formats: [AUTO, WEBP]
         )
