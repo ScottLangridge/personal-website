@@ -12,7 +12,8 @@ const config: GatsbyConfig = {
 
 module.exports = {
     plugins: [
-        `gatsby-plugin-image`,
+	`gatsby-plugin-netlify`,
+	`gatsby-plugin-image`,
         `gatsby-plugin-sharp`,
         `gatsby-transformer-sharp`,
         {
