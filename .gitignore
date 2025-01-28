@@ -5,5 +5,5 @@ src/gatsby-types.d.ts
 
 .idea
 
-src/images/*
-!src/images/.keep
+#src/images/*
+#!src/images/.keep
