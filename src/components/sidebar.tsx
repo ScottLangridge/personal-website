@@ -17,8 +17,15 @@ export default function Sidebar() {
 
     return (
         <>
-            <Button height='100vh' width='10px' padding='0px' borderRadius='0px' colorScheme='teal'
-                    onClick={onOpen}>
+            <Button
+                position="fixed"
+                height='100vh'
+                width='10px'
+                padding='0px'
+                borderRadius='0px'
+                colorScheme='teal'
+                onClick={onOpen}
+            >
                 <ChevronRightIcon boxSize={7}></ChevronRightIcon>
             </Button>
             <Drawer
