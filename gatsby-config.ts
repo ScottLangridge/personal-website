@@ -10,10 +10,15 @@ const config: GatsbyConfig = {
     graphqlTypegen: true,
 };
 
+const adapter = require("gatsby-adapter-netlify").default
+
 module.exports = {
+    adapter: adapter({
+        excludeDatastoreFromEngineFunction: false,
+        imageCDN: false,
+    }),
     plugins: [
-	`gatsby-plugin-netlify`,
-	`gatsby-plugin-image`,
+        `gatsby-plugin-image`,
         `gatsby-plugin-sharp`,
         `gatsby-transformer-sharp`,
         {
