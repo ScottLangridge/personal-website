@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Center, Container, Flex, Heading, Text} from "@chakra-ui/react";
+import {Box, Center, Container, Flex, Heading, Text} from "@chakra-ui/react";
 import Sidebar from "../components/sidebar";
 import {VStack} from "@chakra-ui/icons";
 import MasonryGallery from "../components/MasonryGallery";
@@ -14,8 +14,10 @@ export default function Index({data}) {
                 <Container maxW='90%'>
                     <Center>
                         <VStack>
-                            <Heading>Scott Langridge</Heading>
-                            <Text maxW='100%'>Here are some photos I like.</Text>
+                            <Box marginTop="20px">
+                                <Heading marginY="10px">Scott Langridge</Heading>
+                                <Text maxW='100%' align={"center"}>Here are some photos I like.</Text>
+                            </Box>
                             <MasonryGallery data={data}/>
                         </VStack>
                     </Center>
