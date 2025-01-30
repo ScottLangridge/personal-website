@@ -1,12 +1,31 @@
 import {useState} from "react";
 import * as React from "react";
-import {Box} from "@chakra-ui/react";
+import {VStack, HStack, Box} from "@chakra-ui/react";
 import {GatsbyImage, getImage} from "gatsby-plugin-image";
 import ImageSpotlight from "../components/ImageSpotlight";
 
+const IMG_WIDTH = 400;
+
+function distributeImages(images) {
+    const numCols = 3;
+
+    let distributedImages = [];
+    for (let i = 0; i < numCols; i++) {
+        distributedImages.push([])
+    }
+
+    let i = 0;
+    while (images.length) {
+        distributedImages[i].push(images.shift());
+        i = (i + 1) % numCols;
+    }
+
+    return distributedImages;
+}
 
 export default function MasonryGallery({data}) {
     const images = data.allFile.nodes;
+    const distributedImages = distributeImages(images);
 
     const [spotlightIsOpen, setSpotlightIsOpen] = useState(false);
     const [spotlightImageNode, setSpotlightImageNode] = useState(null);
@@ -17,22 +36,31 @@ export default function MasonryGallery({data}) {
 
     return (
         <>
-            <ImageSpotlight open={spotlightIsOpen} setOpen={setSpotlightIsOpen}
-                            imageNode={spotlightImageNode}></ImageSpotlight>
-            <Box sx={{columnCount: [1, 2, 3], columnGap: "8px"}} marginTop="25px">
-                {images.map((imageNode, index) => {
-                    const image = getImage(imageNode.childImageSharp.gatsbyImageData);
+            <ImageSpotlight
+                open={spotlightIsOpen}
+                setOpen={setSpotlightIsOpen}
+                imageNode={spotlightImageNode}
+            ></ImageSpotlight>
+            <HStack align='start' spacing={4}>
+                {distributedImages.map((columnImages, colIndex) => {
                     return (
-                        <Box padding="10px" onClick={() => onImageClick(imageNode)}>
-                            <GatsbyImage
-                                key={index}
-                                image={image}
-                                alt={`Image ${index + 1}`}
-                                style={{cursor: "pointer"}}/>
-                        </Box>
-                    );
+                        <VStack spacing={4}>
+                            {columnImages.map((imageNode, index) => {
+                                const image = getImage(imageNode.childImageSharp.gatsbyImageData);
+                                return (
+                                    <Box key={index} onClick={() => onImageClick(imageNode)}>
+                                        <GatsbyImage
+                                            image={image}
+                                            alt={`Image ${index + 1}`}
+                                            style={{width: IMG_WIDTH, cursor: "pointer"}}
+                                        />
+                                    </Box>
+                                );
+                            })}
+                        </VStack>
+                    )
                 })}
-            </Box>
+            </HStack>
         </>
     )
 }

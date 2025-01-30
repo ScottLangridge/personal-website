@@ -29,7 +29,7 @@ export default function Index({data}) {
 
 export const query = graphql`
   query {
-  allFile(filter: { sourceInstanceName: { eq: "images" } }) {
+  allFile(filter: { sourceInstanceName: { eq: "images" } }, sort: { birthTime: DESC }) {
     nodes {
       id
       childImageSharp {
