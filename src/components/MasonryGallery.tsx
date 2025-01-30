@@ -14,11 +14,9 @@ function distributeImages(images) {
         distributedImages.push([])
     }
 
-    let i = 0;
-    while (images.length) {
-        distributedImages[i].push(images.shift());
-        i = (i + 1) % numCols;
-    }
+    images.forEach(((image, index) => {
+        distributedImages[index % numCols].push(image);
+    }));
 
     return distributedImages;
 }
