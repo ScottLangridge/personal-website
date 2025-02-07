@@ -1,5 +1,5 @@
 import * as React from "react";
-import {AbsoluteCenter, Flex, Box, Center, Card} from "@chakra-ui/react";
+import {Flex} from "@chakra-ui/react";
 import {GatsbyImage, getImage} from "gatsby-plugin-image";
 
 
