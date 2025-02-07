@@ -4,12 +4,9 @@ import {VStack, HStack, Box} from "@chakra-ui/react";
 import {GatsbyImage, getImage} from "gatsby-plugin-image";
 import ImageSpotlight from "../components/ImageSpotlight";
 
-const IMG_WIDTH = 400;
-
-function distributeImages(images) {
-    const numCols = 3;
-
+function distributeImages(images, numCols) {
     let distributedImages = [];
+
     for (let i = 0; i < numCols; i++) {
         distributedImages.push([])
     }
@@ -21,9 +18,9 @@ function distributeImages(images) {
     return distributedImages;
 }
 
-export default function MasonryGallery({data}) {
+export default function MasonryGallery({data, numCols}) {
     const images = data.allFile.nodes;
-    const distributedImages = distributeImages(images);
+    const distributedImages = distributeImages(images, numCols);
 
     const [spotlightIsOpen, setSpotlightIsOpen] = useState(false);
     const [spotlightImageNode, setSpotlightImageNode] = useState(null);
@@ -40,9 +37,9 @@ export default function MasonryGallery({data}) {
                 imageNode={spotlightImageNode}
             ></ImageSpotlight>
             <HStack align='start' spacing={4}>
-                {distributedImages.map((columnImages, colIndex) => {
+                {distributedImages.map((columnImages) => {
                     return (
-                        <VStack spacing={4}>
+                        <VStack width="100%" spacing={4}>
                             {columnImages.map((imageNode, index) => {
                                 const image = getImage(imageNode.childImageSharp.gatsbyImageData);
                                 return (
@@ -50,7 +47,7 @@ export default function MasonryGallery({data}) {
                                         <GatsbyImage
                                             image={image}
                                             alt={`Image ${index + 1}`}
-                                            style={{width: IMG_WIDTH, cursor: "pointer"}}
+                                            style={{cursor: "pointer"}}
                                         />
                                     </Box>
                                 );
