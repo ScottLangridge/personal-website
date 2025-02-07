@@ -15,6 +15,32 @@ function distributeImages(images, numCols) {
         distributedImages[index % numCols].push(image);
     }));
 
+    const getColumnHeight = (column: object[]) => column.reduce((sum: number, img: object) => {
+        let h = img.childImageSharp.gatsbyImageData.height
+        let w = img.childImageSharp.gatsbyImageData.width
+        let standardisedH = h * (1 / w)
+        return sum + standardisedH;
+    }, 0);
+
+    let columnHeights = distributedImages.map(getColumnHeight);
+    while (true) {
+        let tallestIndex = columnHeights.indexOf(Math.max(...columnHeights));
+        let shortestIndex = columnHeights.indexOf(Math.min(...columnHeights));
+
+        let tallestCol = distributedImages[tallestIndex];
+        let shortestCol = distributedImages[shortestIndex];
+
+        let lastImage = tallestCol.pop()!;
+        shortestCol.push(lastImage);
+
+        columnHeights[tallestIndex] = getColumnHeight(tallestCol);
+        columnHeights[shortestIndex] = getColumnHeight(shortestCol);
+
+        if (columnHeights[tallestIndex] - columnHeights[shortestIndex] < lastImage.childImageSharp.gatsbyImageData.height) {
+            break;
+        }
+    }
+
     return distributedImages;
 }
 
