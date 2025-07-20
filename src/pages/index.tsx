@@ -13,7 +13,8 @@ export default function Index({data}) {
                     <Center>
                         <VStack>
                             <Heading marginBottom="10px">Scott Langridge</Heading>
-                            <Text maxW='100%' align={"center"}>Here are some photos that I like.</Text>
+                            <Text maxW='100%' align={"center"}>Here are some photos that I took.</Text>
+                            <Text maxW='100%' align={"center"}>(You can click them for fullscreen)</Text>
                             <Box height="10px" width="100vw" backgroundColor="teal"></Box>
                             <Box maxW="80%">
                                 <ResponsiveMasonryGallery data={data}/>
