@@ -7,14 +7,14 @@ import ResponsiveMasonryGallery from "../components/ResonsiveMasonryGallery";
 
 export default function Index({data}) {
     return (
-        <div>
+        <Box bg="gray.100" color="gray.800" minH="100vh">
             <Flex>
                 <Container maxW='90%'>
                     <Center>
                         <VStack>
-                            <Heading marginBottom="10px">Scott Langridge</Heading>
-                            <Text maxW='100%' align={"center"}>Here are some photos that I took.</Text>
-                            <Text maxW='100%' align={"center"}>(You can click them for fullscreen)</Text>
+                            <Heading marginBottom="10px" color="gray.800">Scott Langridge</Heading>
+                            <Text maxW='100%' align={"center"} color="gray.600">Here are some photos that I took.</Text>
+                            <Text maxW='100%' align={"center"} color="gray.600">(You can click them for fullscreen)</Text>
                             <Box height="10px" width="100vw" backgroundColor="teal"></Box>
                             <Box maxW="80%">
                                 <ResponsiveMasonryGallery data={data}/>
@@ -23,7 +23,7 @@ export default function Index({data}) {
                     </Center>
                 </Container>
             </Flex>
-        </div>
+        </Box>
     )
 }
 
